@@ -1,0 +1,12 @@
+AAPL,Steven Jobs,.12
+AAPL,Steven Wazniac,.09
+AAPL,Tim Cook,.001
+AAPL,Jerry Yang,.02
+AAPL,Larry Page,.0002
+GOOG,Larry Page,.002
+GOOG,Serge Brin,.01
+C,Vikram Pandit,.2
+MSFT,Bill Gates,.03
+BABA,Jack Ma,.1
+MSFT,Satya Nadella,.009
+FB,Mark Zuckerberg,.12
