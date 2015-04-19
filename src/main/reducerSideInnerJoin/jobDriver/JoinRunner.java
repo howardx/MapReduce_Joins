@@ -1,7 +1,7 @@
 package jobDriver;
 
-import keyValueTypes.MultiMapperValue;
-import keyValueTypes.TickerDateRecordKey;
+import keyValueTypes.BoardTickerPercentValue;
+import keyValueTypes.MRjoinSharedKey;
 import mappers.BoardTickerPercentMapper;
 import mappers.TickerPriceVolumeMapper;
 
@@ -21,11 +21,13 @@ import org.apache.hadoop.util.ToolRunner;
 
 import reducer.JoinReducer;
 
-/***************************************************
- * need to RESTRICT the use of new API only to AVOID
- * clashes and compile errors.
- * 
- * new API package: org.apache.hadoop.mapreduce
+/*
+ * JOIN during the REDUCE phase of Map-Reduce application.
+ *   -- reduce side join
+ *   
+ * This technique is recommended when both datasets are large.
+ * Both will be mapped/distributed over the network/cluster
+ *   -- low performance
  */
 
 public class JoinRunner extends Configured implements Tool
@@ -40,14 +42,15 @@ public class JoinRunner extends Configured implements Tool
     job.setInputFormatClass(TextInputFormat.class);
     job.setOutputFormatClass(TextOutputFormat.class);
                                
-    job.setMapOutputKeyClass(TickerDateRecordKey.class);
-    job.setMapOutputValueClass(MultiMapperValue.class);
+    job.setMapOutputKeyClass(MRjoinSharedKey.class);
+    job.setMapOutputValueClass(BoardTickerPercentValue.class);
     
     MultipleInputs.addInputPath(job, new Path(args[0]), TextInputFormat.class, TickerPriceVolumeMapper.class);
     MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, BoardTickerPercentMapper.class);
                               
     job.setReducerClass(JoinReducer.class);
-                         
+     
+    // USEFUL !
     //job.setSortComparatorClass(JoinSortingComparator.class);
     //job.setGroupingComparatorClass(JoinGroupingComparator.class);
                                

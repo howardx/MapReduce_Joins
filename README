@@ -1,0 +1,3 @@
+need to RESTRICT the use of new Hadoop API ONLY to AVOID clashes and compile errors.
+
+new Hadoop API package: org.apache.hadoop.mapreduce.*
