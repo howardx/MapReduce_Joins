@@ -50,7 +50,29 @@ public class JoinRunner extends Configured implements Tool
                               
     job.setReducerClass(JoinReducer.class);
      
-    // USEFUL !
+    /**
+     * job.setSortComparatorClass(): 
+     * 
+     * used to compare mapper output (key, value) pairs' key
+     * during the SORTING phase, after partitioner decides 
+     * to which reducer instance this key goes to.
+     * 
+     * job.setGroupingComparatorClass():
+     * 
+     * after (key, value) pairs from mapper being sent to reducer
+     * instances, it was still in (key, value) pairs ant NOT
+     * (key, Iterator<value>) pairs.
+     * Hence (key, value) pairs need to be grouped by key, hence
+     * this comparator is needed at this stage for comparison
+     * for keys
+     * 
+     * If mapper's output key has a compareTo() method defined, 
+     * then the compareTo() method will be used for the sorting
+     * and grouping purposes and these comparators won't be 
+     * necessary. (if defined will be used in priority)
+     * 
+     * But comparators perform faster 
+     */
     //job.setSortComparatorClass(JoinSortingComparator.class);
     //job.setGroupingComparatorClass(JoinGroupingComparator.class);
                                

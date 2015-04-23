@@ -12,8 +12,6 @@ import org.apache.hadoop.mapreduce.Mapper;
 public class BoardTickerPercentMapper extends
   Mapper<LongWritable, Text, MRjoinSharedKey, BoardTickerPercentValue>
 {
-  public MRjoinSharedKey key = new MRjoinSharedKey();
-  
   public void map(LongWritable lineOffset, Text row,
     Context context) throws IOException, InterruptedException
   {
@@ -29,7 +27,9 @@ public class BoardTickerPercentMapper extends
     String percentOwnership = tokenizedRow[2];
     
     MRjoinSharedKey key = new MRjoinSharedKey(ticker, 1);
+    BoardTickerPercentValue value = new BoardTickerPercentValue (
+      boardMember, Double.valueOf(percentOwnership));
     
-    
+    context.write(key, value);
   }
 }

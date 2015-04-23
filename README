@@ -1,3 +1,9 @@
 need to RESTRICT the use of new Hadoop API ONLY to AVOID clashes and compile errors.
 
 new Hadoop API package: org.apache.hadoop.mapreduce.*
+
+1. composite and shared key
+
+2. 2 input path for 2 datasets, along with 2 mappers and 2 mapper output classes (value in key-value pairs)
+
+3. 
